@@ -2,18 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function SidebarLink(props) {
-  const { icon = null, label = "", url = "#" } = props;
+  const { icon = null, label = "", url = "#", end = false } = props;
+
+  const navStyles = ({ isActive }) => {
+    return isActive ? "side-navlink active-link" : "side-navlink";
+  };
 
   return (
-    <div className="inline-flex">
+    <NavLink end={end} to={url} className={navStyles}>
       {icon ? icon : null}
-      <NavLink
-        to={url}
-        className={({ isActive }) => (isActive ? "color-red" : "color-green")}
-      >
-        {label}
-      </NavLink>
-    </div>
+      <span className="ps-3">{label}</span>
+    </NavLink>
   );
 }
 
