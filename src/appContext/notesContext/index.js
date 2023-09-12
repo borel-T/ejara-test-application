@@ -116,6 +116,15 @@ export const NotesContextProvider = (props) => {
     }
   };
 
+  const _toggleView = () => {
+    dispatch({
+      type: actions.TOGGLE_VIEW,
+      payload: {
+        listView: !state?.listView,
+      },
+    });
+  };
+
   const contextData = {
     // states
     state,
@@ -125,6 +134,7 @@ export const NotesContextProvider = (props) => {
     archiveNote: _archiveNote,
     restoreNote: _restoreNote,
     deleteNote: _deleteNote,
+    toggleView: _toggleView,
   };
 
   // pass the value in provider and return

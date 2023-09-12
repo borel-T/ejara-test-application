@@ -2,6 +2,7 @@ import actions from "./actions";
 
 // notes context initial state
 export const initialState = {
+  listView: true,
   notes: [],
   // notes: [
   //   {
@@ -86,6 +87,11 @@ const notesReducer = (state, action) => {
       return {
         ...state,
         notes: payload.notes,
+      };
+    case actions.TOGGLE_VIEW:
+      return {
+        ...state,
+        listView: payload.listView,
       };
     default:
       throw new Error(`No case for action type ${type}`);

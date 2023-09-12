@@ -7,5 +7,6 @@ const actions = {
   TRASH_NOTE: "TRASH",
   RESTORE_NOTE: "RESTORE",
   DELETE_NOTE: "DELETE",
+  TOGGLE_VIEW: "TOGGLE_VIEW",
 };
 export default actions;
