@@ -19,17 +19,20 @@ function Notes() {
   };
 
   return (
-    <div>
+    <>
+      <h3 className="mb-3">Notes writer !</h3>
       <NoteInput saveNoteHandler={noteHandler} />
 
       {/* notes */}
-      <NoteCardList
-        list={state?.notes}
-        onArchive={archiveNote}
-        onDelete={deleteNote}
-        onColor={updateNoteColor}
-      />
-    </div>
+      {state?.notes.length > 0 && (
+        <NoteCardList
+          list={state?.notes}
+          onArchive={archiveNote}
+          onDelete={deleteNote}
+          onColor={updateNoteColor}
+        />
+      )}
+    </>
   );
 }
 

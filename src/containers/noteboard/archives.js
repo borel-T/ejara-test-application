@@ -9,12 +9,15 @@ function Archives() {
   const { state, archiveNote, deleteNote } = useNotesContext();
 
   return (
-    <NoteCardList
-      list={state?.notes}
-      onArchive={archiveNote}
-      onDelete={deleteNote}
-      filterBy={"archived"}
-    />
+    <>
+      <h3>Archives</h3>
+      <NoteCardList
+        list={state?.notes}
+        onArchive={archiveNote}
+        onDelete={deleteNote}
+        filterBy={"archived"}
+      />
+    </>
   );
 }
 

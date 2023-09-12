@@ -9,12 +9,15 @@ function BinNotes() {
   const { state, restoreNote, deleteNote } = useNotesContext();
 
   return (
-    <NoteCardList
-      list={state?.notes}
-      filterBy={"deleted"}
-      onRestore={restoreNote}
-      onDelete={deleteNote}
-    />
+    <>
+      <h3>Bin Notes</h3>
+      <NoteCardList
+        list={state?.notes}
+        filterBy={"deleted"}
+        onRestore={restoreNote}
+        onDelete={deleteNote}
+      />
+    </>
   );
 }
 

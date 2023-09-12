@@ -1,26 +1,24 @@
 import React from "react";
-import SidebarLink from "../../components/sidebarLink";
-import appRoutes from "../../lib/appRoutes";
+
+import NavBar from "../../components/navbar";
+import SideBar from "./sidebar";
 import { Outlet } from "react-router";
 
 function Dashboard_layout() {
   return (
-    <>
-      <div className="col-8 p-4">
+    <div className="h-100">
+      <NavBar />
+      <div className="container-fluid">
         <div className="row">
-          <aside className="col-4">
-            <SidebarLink url={appRoutes.notes} label={"Notes"} />
-            <SidebarLink url={appRoutes.reminders} label={"Reminders"} />
-            <SidebarLink url={appRoutes.archives} label={"Archives"} />
-            <SidebarLink url={appRoutes.bin} label={"Bin"} />
+          <aside className="col-3">
+            <SideBar />
           </aside>
-
-          <section className="col-8">
+          <section className="col-9 p-3">
             <Outlet />
           </section>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
