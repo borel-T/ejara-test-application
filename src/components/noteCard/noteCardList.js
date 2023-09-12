@@ -48,7 +48,7 @@ function NoteCardList(props) {
           ))}
       </div>
       {/* case: no data */}
-      {renderItems().length == 0 && (
+      {renderItems().length === 0 && (
         <div className="border rounded shadow-sm p-4 mt-5">
           <h3>No Data Found !</h3>
         </div>
