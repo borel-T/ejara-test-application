@@ -4,7 +4,7 @@ import NoteCard from "./index";
 
 function NoteCardList(props) {
   // data
-  const { list, filterBy = "" } = props;
+  const { list, filterBy = "", listViewType = true } = props;
   const {
     onArchive = () => {},
     onColor = () => {},
@@ -27,22 +27,26 @@ function NoteCardList(props) {
   return (
     <>
       {/* notes */}
-      {renderItems().length > 0 &&
-        renderItems().map((note, key) => (
-          <NoteCard
-            key={key}
-            bgColor={note.bgColor}
-            title={note.title}
-            text={note.text}
-            archived={note.archived}
-            deleted={note.deleted}
-            onArchive={() => onArchive(note.uuid)}
-            onTrash={() => onDelete(note.uuid, "temporal")}
-            onDelete={() => onDelete(note.uuid, "final")}
-            onRestore={() => onRestore(note.uuid)}
-            onColorChange={(color) => onColor(note.uuid, color)}
-          />
-        ))}
+      <div className="row">
+        {renderItems().length > 0 &&
+          renderItems().map((note, key) => (
+            <div className={`${listViewType ? "col-12" : "col-4"}`}>
+              <NoteCard
+                key={key}
+                bgColor={note.bgColor}
+                title={note.title}
+                text={note.text}
+                archived={note.archived}
+                deleted={note.deleted}
+                onArchive={() => onArchive(note.uuid)}
+                onTrash={() => onDelete(note.uuid, "temporal")}
+                onDelete={() => onDelete(note.uuid, "final")}
+                onRestore={() => onRestore(note.uuid)}
+                onColorChange={(color) => onColor(note.uuid, color)}
+              />
+            </div>
+          ))}
+      </div>
       {/* case: no data */}
       {renderItems().length == 0 && (
         <div className="border rounded shadow-sm p-4 mt-5">

@@ -1,13 +1,15 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import { HomeOutlined, ViewHeadline, ViewModule } from "@mui/icons-material";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -51,7 +53,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function Navbar(props) {
+  // hooks
+  const navigate = useNavigate();
+
+  // props
+  const {
+    onSearch = () => {},
+    listViewType = true,
+    onViewChange = () => {},
+    homeUrl = "#",
+  } = props;
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="relative" color="default">
@@ -71,8 +84,9 @@ export default function SearchAppBar() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            MUI
+            Note Writer App
           </Typography>
+          {/* search */}
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -82,6 +96,31 @@ export default function SearchAppBar() {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
+          {/* list-view */}
+
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={() => {
+              onViewChange();
+            }}
+          >
+            {listViewType ? <ViewHeadline /> : <ViewModule />}
+          </IconButton>
+          {/* home */}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={() => navigate(homeUrl)}
+          >
+            <HomeOutlined />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </Box>
