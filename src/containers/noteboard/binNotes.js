@@ -15,6 +15,7 @@ function BinNotes() {
         list={state?.notes}
         filterBy={"deleted"}
         onRestore={restoreNote}
+        listViewType={state?.listView}
         onDelete={deleteNote}
       />
     </>

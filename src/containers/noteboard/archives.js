@@ -15,6 +15,7 @@ function Archives() {
         list={state?.notes}
         onArchive={archiveNote}
         onDelete={deleteNote}
+        listViewType={state?.listView}
         filterBy={"archived"}
       />
     </>

@@ -30,6 +30,7 @@ function Notes() {
           onArchive={archiveNote}
           onDelete={deleteNote}
           onColor={updateNoteColor}
+          listViewType={state?.listView}
         />
       )}
     </>
