@@ -23,11 +23,10 @@ function NoteCardList(props) {
     }
     return [];
   };
-  console.log("renderItems", renderItems());
+
   return (
     <>
       {/* notes */}
-      {<span>{filterBy}</span>}
       {renderItems().length > 0 &&
         renderItems().map((note, key) => (
           <NoteCard
@@ -44,6 +43,12 @@ function NoteCardList(props) {
             onColorChange={(color) => onColor(note.uuid, color)}
           />
         ))}
+      {/* case: no data */}
+      {renderItems().length == 0 && (
+        <div className="border rounded shadow-sm p-4 mt-5">
+          <h3>No Data Found !</h3>
+        </div>
+      )}
     </>
   );
 }
