@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+// routes-configs
+import { Routes, Route } from "react-router";
+import appRoutes from "./lib/appRoutes";
+// views
+import Landing from "./containers/auth/landing";
+import NoteBoard from "./containers/noteboard";
+import Notes from "./containers/noteboard/notes";
+import Archives from "./containers/noteboard/archives";
+import BinNotes from "./containers/noteboard/binNotes";
+import Reminders from "./containers/noteboard/reminders";
+import NotFound from "./containers/notFound";
+// contexts
+import { NotesContextProvider } from "./appContext/";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NotesContextProvider>
+      <Routes>
+        <Route path={appRoutes.home} element={<Landing />} />
+        <Route path={appRoutes.notes} element={<NoteBoard />}>
+          <Route index element={<Notes />} />
+          <Route path={appRoutes.archives} element={<Archives />} />
+          <Route path={appRoutes.bin} element={<BinNotes />} />
+          <Route path={appRoutes.reminders} element={<Reminders />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </NotesContextProvider>
   );
-}
+};
 
 export default App;
