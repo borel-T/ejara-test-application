@@ -1,10 +1,10 @@
 # Ejara test application
 
-This a a little client side note writer appilication.
-Users can :
+This a a little client side note writer application. Using this app users can :
 
 - Create notes and customize their look
 - Store important notes into archives
+- Update notes information
 - Delete notes
 
 ## How to run the project
