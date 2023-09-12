@@ -17,3 +17,28 @@ textarea:focus,
 input:focus {
   outline: none !important;
 }
+
+/* sidebar-navlink */
+.side-navlink {
+  border-radius: 25px;
+  padding: 12.5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  font-weight: bold;
+}
+.side-navlink:hover,
+:focus {
+  color: black;
+}
+.active-link {
+  background-color: #feefc3;
+}
+
+.sidebar {
+  height: 100vh;
+  border-right: 1px solid #d5d5d5;
+  box-shadow: 3px 0 15px -6px rgba(135, 135, 136, 0.8);
+}
