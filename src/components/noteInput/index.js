@@ -25,7 +25,9 @@ function NoteInput(props) {
       saveNoteHandler(myNote);
       setMyNote(DEFAUlT_NOTE);
     }
-    setFullDisplay(!fullDisplay);
+    if (fullDisplay === true) {
+      setFullDisplay(!fullDisplay);
+    }
   }
 
   return (
