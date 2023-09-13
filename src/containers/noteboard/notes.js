@@ -7,8 +7,14 @@ import NoteInput from "../../components/noteInput";
 
 function Notes() {
   // data
-  const { state, addNote, archiveNote, deleteNote, updateNoteColor } =
-    useNotesContext();
+  const {
+    state,
+    addNote,
+    archiveNote,
+    deleteNote,
+    updateNote,
+    updateNoteColor,
+  } = useNotesContext();
 
   // note-input-handler
   const noteHandler = (note) => {
@@ -27,10 +33,12 @@ function Notes() {
       {state?.notes.length > 0 && (
         <NoteCardList
           list={state?.notes}
+          onUpdate={updateNote}
           onArchive={archiveNote}
           onDelete={deleteNote}
           onColor={updateNoteColor}
           listViewType={state?.listView}
+          allowNoteEditing={true}
         />
       )}
     </>

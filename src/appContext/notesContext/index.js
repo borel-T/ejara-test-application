@@ -46,6 +46,24 @@ export const NotesContextProvider = (props) => {
     }
   };
 
+  const _updateNote = (noteId, newContent) => {
+    const list = state?.notes;
+
+    let index = list.findIndex((item) => item.uuid === noteId);
+    if (index > -1) {
+      list[index].title = newContent?.title;
+      list[index].text = newContent?.text;
+
+      // dispactcher
+      dispatch({
+        type: actions.UPDATE_NOTE_CONTENT,
+        payload: {
+          notes: list,
+        },
+      });
+    }
+  };
+
   const _updateNoteColor = (noteId, newColor) => {
     const list = state?.notes;
 
@@ -131,6 +149,7 @@ export const NotesContextProvider = (props) => {
     // methods
     addNote: _addNote,
     updateNoteColor: _updateNoteColor,
+    updateNote: _updateNote,
     archiveNote: _archiveNote,
     restoreNote: _restoreNote,
     deleteNote: _deleteNote,
