@@ -6,8 +6,9 @@ import {
   DeleteForever,
 } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
-
+import Tooltip from "@mui/material/Tooltip";
 import ColorPicker from "../colorPicker";
+import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 
 function NoteCard(props) {
   // attriubtes
@@ -17,7 +18,12 @@ function NoteCard(props) {
     archived = false,
     deleted = false,
     bgColor = "#fff",
+    allowEdit = false,
   } = props;
+
+  // states
+  const [newTitle, setNewTitle] = React.useState(title);
+  const [newText, setNewText] = React.useState(text);
 
   // handlers
   const {
@@ -26,39 +32,71 @@ function NoteCard(props) {
     onTrash = () => {},
     onRestore = () => {},
     onDelete = () => {},
+    onUpdate = () => {},
   } = props;
 
   return (
-    <div
-      className="border p-3 mb-3 rounded shadow-sm"
-      style={{ ...(bgColor && { backgroundColor: bgColor }) }}
+    <ClickAwayListener
+      onClickAway={() => onUpdate({ title: newTitle, text: newText })}
     >
-      <h5>{title}</h5>
-      <p>{text}</p>
+      <div
+        className="note-card border p-3 mb-3 rounded shadow-sm"
+        style={{ ...(bgColor && { backgroundColor: bgColor }) }}
+      >
+        <input
+          className="mb-2 border-0 fs-5 d-block w-100 fw-bold"
+          disabled={!allowEdit}
+          value={newTitle}
+          autoFocus={false}
+          onChange={(e) => {
+            setNewTitle(e.target.value);
+          }}
+        />
 
-      {deleted && (
-        <div className="d-flex">
-          <IconButton aria-label="archive" onClick={onRestore}>
-            <RestoreFromTrash color="success" />
-          </IconButton>
-          <IconButton aria-label="delete" onClick={onDelete}>
-            <DeleteForever color="error" />
-          </IconButton>
-        </div>
-      )}
+        {/* text area */}
+        <textarea
+          className="w-100"
+          disabled={!allowEdit}
+          value={newText}
+          autoFocus={false}
+          onChange={(e) => {
+            setNewText(e.target.value);
+          }}
+        />
 
-      {!deleted && (
-        <div className="d-flex">
-          <ColorPicker onSelect={onColorChange} />
-          <IconButton aria-label="archive" onClick={onArchive}>
-            <ArchiveOutlined color={archived ? "primary" : ""} />
-          </IconButton>
-          <IconButton aria-label="delete" onClick={onTrash}>
-            <DeleteOutlineOutlined />
-          </IconButton>
-        </div>
-      )}
-    </div>
+        {deleted && (
+          <div className="d-flex">
+            <Tooltip title={"Restore note"}>
+              <IconButton aria-label="archive" onClick={onRestore}>
+                <RestoreFromTrash color="success" />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title={"Delete note forever"}>
+              <IconButton aria-label="delete" onClick={onDelete}>
+                <DeleteForever color="error" />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
+
+        {!deleted && (
+          <div className="d-flex">
+            <ColorPicker onSelect={onColorChange} />
+            <Tooltip title={"Archive note"}>
+              <IconButton aria-label="archive" onClick={onArchive}>
+                <ArchiveOutlined color={archived ? "primary" : ""} />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={"Throw note to bin"}>
+              <IconButton aria-label="delete" onClick={onTrash}>
+                <DeleteOutlineOutlined />
+              </IconButton>
+            </Tooltip>
+          </div>
+        )}
+      </div>
+    </ClickAwayListener>
   );
 }
 

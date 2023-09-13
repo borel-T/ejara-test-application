@@ -4,12 +4,18 @@ import NoteCard from "./index";
 
 function NoteCardList(props) {
   // data
-  const { list, filterBy = "", listViewType = true } = props;
+  const {
+    list,
+    filterBy = "",
+    listViewType = true,
+    allowNoteEditing = false,
+  } = props;
   const {
     onArchive = () => {},
     onColor = () => {},
     onRestore = () => {},
     onDelete = () => {},
+    onUpdate = () => {},
   } = props;
 
   // render
@@ -30,9 +36,8 @@ function NoteCardList(props) {
       <div className="row">
         {renderItems().length > 0 &&
           renderItems().map((note, key) => (
-            <div className={`${listViewType ? "col-12" : "col-4"}`}>
+            <div key={key} className={`${listViewType ? "col-12" : "col-4"}`}>
               <NoteCard
-                key={key}
                 bgColor={note.bgColor}
                 title={note.title}
                 text={note.text}
@@ -42,7 +47,9 @@ function NoteCardList(props) {
                 onTrash={() => onDelete(note.uuid, "temporal")}
                 onDelete={() => onDelete(note.uuid, "final")}
                 onRestore={() => onRestore(note.uuid)}
+                onUpdate={(newContent) => onUpdate(note.uuid, newContent)}
                 onColorChange={(color) => onColor(note.uuid, color)}
+                allowEdit={allowNoteEditing}
               />
             </div>
           ))}
