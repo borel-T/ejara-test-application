@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+/* 
+ The following code ought to be well organized
+ This style is placed here, to simplify development purposes
+*/
+
 /* html-inputs */
 input,
 textarea {
