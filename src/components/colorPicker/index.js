@@ -3,8 +3,9 @@ import IconButton from "@mui/material/IconButton";
 import Popover from "@mui/material/Popover";
 import { Palette, FiberManualRecordRounded } from "@mui/icons-material";
 import Paper from "@mui/material/Paper";
+import Tooltip from "@mui/material/Tooltip";
 
-const COLORS = ["#ff9999", "#99ccff", "#99ff99"];
+const COLORS = ["#FF9999", "#99CCFF", "#99FF99"];
 
 function ColorPicker(props) {
   // states
@@ -26,9 +27,11 @@ function ColorPicker(props) {
 
   return (
     <>
-      <IconButton aria-label="palette" onClick={handlePicker}>
-        <Palette />
-      </IconButton>
+      <Tooltip title="Background options">
+        <IconButton aria-label="palette" onClick={handlePicker}>
+          <Palette />
+        </IconButton>
+      </Tooltip>
       {/* colors picker */}
       <Popover
         open={open}
@@ -42,9 +45,11 @@ function ColorPicker(props) {
         <Paper>
           <div className="p-1">
             {COLORS.map((color, key) => (
-              <IconButton key={key} onClick={() => onSelect(color)}>
-                <FiberManualRecordRounded style={{ color }} />
-              </IconButton>
+              <Tooltip key={key} title={`Color - ${color}`}>
+                <IconButton onClick={() => onSelect(color)}>
+                  <FiberManualRecordRounded style={{ color }} />
+                </IconButton>
+              </Tooltip>
             ))}
           </div>
         </Paper>

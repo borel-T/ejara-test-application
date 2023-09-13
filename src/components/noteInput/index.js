@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
 import IconButton from "@mui/material/IconButton";
 import ColorPicker from "../colorPicker";
+import Tooltip from "@mui/material/Tooltip";
 import { ArchiveOutlined } from "@mui/icons-material";
 
 const DEFAUlT_NOTE = {
@@ -41,7 +42,6 @@ function NoteInput(props) {
           <input
             className="mb-2 border-0 fs-5 d-block w-100 fw-bold"
             placeholder="Title"
-            style={{ border: "none", background: "none" }}
             value={myNote.title}
             onChange={(e) => {
               setMyNote({
@@ -55,7 +55,6 @@ function NoteInput(props) {
         {/* text area */}
         <textarea
           className="w-100"
-          style={{ border: "none", background: "none" }}
           placeholder="Take a note..."
           value={myNote.text}
           onFocus={() => setFullDisplay(true)}
@@ -78,17 +77,19 @@ function NoteInput(props) {
               }
             />
             {/* archiving */}
-            <IconButton
-              aria-label="archive"
-              onClick={() =>
-                setMyNote({
-                  ...myNote,
-                  archived: !myNote.archived,
-                })
-              }
-            >
-              <ArchiveOutlined color={myNote.archived ? "primary" : ""} />
-            </IconButton>
+            <Tooltip title={"Archive note"}>
+              <IconButton
+                aria-label="archive"
+                onClick={() =>
+                  setMyNote({
+                    ...myNote,
+                    archived: !myNote.archived,
+                  })
+                }
+              >
+                <ArchiveOutlined color={myNote.archived ? "primary" : ""} />
+              </IconButton>
+            </Tooltip>
           </div>
         )}
       </div>
