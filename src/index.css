@@ -13,6 +13,11 @@ code {
 }
 
 /* html-inputs */
+input,
+textarea {
+  border: none;
+  background: none;
+}
 textarea:focus,
 input:focus {
   outline: none !important;
@@ -35,6 +40,11 @@ input:focus {
 }
 .active-link {
   background-color: #feefc3;
+}
+
+.note-card:hover {
+  transition: all ease-in-out;
+  border: 1px solid rgb(170, 170, 170) !important;
 }
 
 .sidebar {
